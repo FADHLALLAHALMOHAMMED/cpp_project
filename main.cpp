@@ -28,7 +28,7 @@ int main() {
     const int LIMIT = 1000;
     int noOfStf = 0;
     staffInfo stfDetails[LIMIT];
-    int userChoice(0);
+    char userChoice(0);
 
 
     cout << "------- Welcome to the Staff System -------";
@@ -36,6 +36,8 @@ int main() {
     userChoice = menu();
 
     displayRecords(staffFile, stfDetails, noOfStf);
+
+    cout << "hello";
 
 
 
