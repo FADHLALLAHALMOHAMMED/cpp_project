@@ -1,3 +1,17 @@
+/*
+
+    Student Name:
+    Fadhlallah Almohammed    2230006097
+    Ahmed Alnaser 
+    Akbar Al-ali
+    Abbas Albasri
+    Ali Alzahrani
+    Abdulsalam Al-eissa
+
+
+*/
+
+
 #include <iostream>
 #include <string>
 #include <cctype>
