@@ -32,12 +32,15 @@ struct staffInfo {
 
 
 char menu();
-void loadData(string, staffInfo, int&);
+void loadData(string, staffInfo [], int&);
 void displayRecords(string, staffInfo [], int&);
+
+// saveData function saves the data as following: name, id, position, department, email, age, salary
+void saveData(string, staffInfo [], int&);
 
 int main() {
 
-    const string staffFile = "staff_info.txt";
+    const string stfFileName = "staff_info.txt";
 
     const int LIMIT = 1000;
     int noOfStf = 0;
@@ -49,10 +52,10 @@ int main() {
 
     userChoice = menu();
 
-    displayRecords(staffFile, stfDetails, noOfStf);
 
-    cout << "hello";
+    loadData(stfFileName, stfDetails, noOfStf);
 
+    displayRecords(stfFileName, stfDetails, noOfStf);
 
 
 
@@ -97,6 +100,7 @@ void loadData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
         int count(0);
 
         while (!staffFile.eof()) {
+
             getline(staffFile, stfDetails[count].name, ',');
             getline(staffFile, stfDetails[count].id, ',');
             getline(staffFile, stfDetails[count].position, ',');
@@ -111,6 +115,29 @@ void loadData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
         }
         staffFile.close();
         noOfStaff = count;
+    }
+}
+
+void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
+
+    ofstream staffFile(fileName);
+
+    if (staffFile.is_open()) {
+        for (int i = 0; i < noOfStaff; i++) {
+            staffFile << stfDetails[i].name << ", ";
+            staffFile << stfDetails[i].id << ", ";
+            staffFile << stfDetails[i].position << ", ";
+            staffFile << stfDetails[i].department << ", ";
+            staffFile << stfDetails[i].email << ", ";
+            staffFile << stfDetails[i].age << ", ";
+            staffFile << stfDetails[i].salary;
+
+            if (i != noOfStaff-1) {
+                staffFile << endl;
+            }
+            
+        }
+        staffFile.close();
     }
 }
 
