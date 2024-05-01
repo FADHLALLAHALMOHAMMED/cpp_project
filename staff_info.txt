@@ -1,45 +1,15 @@
-Maria Rodriguez, 2093857123, Software Developer, IT, maria.rodriguez@example.com, 29, 60000
-John Smith, 1547896234, Sales Manager, Sales, john.smith@example.com, 35, 75000
-Emily Johnson, 8374629156, Marketing Specialist, Marketing, emily.johnson@example.com, 28, 55000
-Michael Chen, 4287135690, Data Analyst, Analytics, michael.chen@example.com, 31, 62000
-Samantha Taylor, 6392058741, HR Coordinator, HR, samantha.taylor@example.com, 26, 50000
-David Brown, 9175384620, Financial Analyst, Finance, david.brown@example.com, 33, 67000
-Jessica Martinez, 2059718346, Project Manager, Project Management, jessica.martinez@example.com, 30, 68000
-Daniel Lee, 3627091854, Graphic Designer, Design, daniel.lee@example.com, 27, 56000
-Sarah Wilson, 5146972380, Customer Service Representative, Customer Service, sarah.wilson@example.com, 24, 48000
-Christopher Nguyen, 7264908135, IT Support Specialist, IT, christopher.nguyen@example.com, 32, 64000
-Rachel Thomas, 8392571064, Operations Manager, Operations, rachel.thomas@example.com, 34, 70000
-Andrew Anderson, 1320485793, Quality Assurance Tester, Quality Assurance, andrew.anderson@example.com, 29, 58000
-Jennifer Garcia, 4907538216, Administrative Assistant, Administration, jennifer.garcia@example.com, 25, 52000
-Matthew Hernandez, 6739052184, Software Engineer, IT, matthew.hernandez@example.com, 31, 63000
-Elizabeth Lopez, 9173640258, Marketing Manager, Marketing, elizabeth.lopez@example.com, 36, 78000
-Justin White, 3589146072, Business Analyst, Business Analysis, justin.white@example.com, 32, 66000
-Amanda Clark, 6820935147, Content Writer, Content, amanda.clark@example.com, 28, 57000
-Brandon Scott, 2405781963, Network Administrator, IT, brandon.scott@example.com, 30, 69000
-Lauren Young, 5096173842, Event Coordinator, Events, lauren.young@example.com, 27, 59000
-Kevin Kim, 3941857206, Financial Advisor, Finance, kevin.kim@example.com, 35, 74000
-Michelle Martinez, 6731492085, Human Resources Manager, HR, michelle.martinez@example.com, 33, 68000
-Steven Walker, 8163957204, UI/UX Designer, Design, steven.walker@example.com, 29, 60000
-Kayla Lewis, 3259610478, Sales Representative, Sales, kayla.lewis@example.com, 26, 55000
-Dylan Baker, 7293815604, Database Administrator, IT, dylan.baker@example.com, 31, 65000
-Melissa Gonzalez, 6174832095, Customer Support Specialist, Customer Service, melissa.gonzalez@example.com, 28, 58000
-Jonathan Perez, 9405721836, Product Manager, Product Management, jonathan.perez@example.com, 34, 71000
-Stephanie Hall, 5820467139, Recruiter, HR, stephanie.hall@example.com, 30, 62000
-Jacob Wright, 4738192650, Web Developer, IT, jacob.wright@example.com, 32, 67000
-Erica King, 2095387461, Public Relations Specialist, PR, erica.king@example.com, 27, 59000
-Patrick Adams, 6938174520, Systems Analyst, IT, patrick.adams@example.com, 33, 69000
-Alexandra Ramirez, 8152093764, Social Media Manager, Social Media, alexandra.ramirez@example.com, 29, 61000
-Cameron Campbell, 2584703916, Technical Writer, Documentation, cameron.campbell@example.com, 28, 60000
-Rachel Cooper, 4739056182, Accountant, Accounting, rachel.cooper@example.com, 35, 73000
-Nicole Martinez, 6309842715, Marketing Coordinator, Marketing, nicole.martinez@example.com, 26, 56000
-Jordan Hernandez, 2083649751, IT Manager, IT, jordan.hernandez@example.com, 36, 76000
-Ashley Scott, 3902175468, Customer Success Manager, Customer Success, ashley.scott@example.com, 31, 66000
-Tyler Nguyen, 5194630872, Data Scientist, Analytics, tyler.nguyen@example.com, 30, 64000
-Hannah Miller, 7285093164, Operations Coordinator, Operations, hannah.miller@example.com, 27, 59000
-Justin Rodriguez, 2947806135, Marketing Director, Marketing, justin.rodriguez@example.com, 35, 72000
-Emma Thompson, 8152097346, UX Researcher, Design, emma.thompson@example.com, 28, 58000
-Ryan Lewis, 6274910853, Business Development Manager, Business Development, ryan.lewis@example.com, 34, 70000
-Brianna Wright, 5037261894, Customer Experience Specialist, Customer Service, brianna.wright@example.com, 29, 61000
-David Robinson, 9405276183, Project Coordinator, Project Management, david.robinson@example.com, 33, 67000
-Madison Martinez, 6172850493, Sales Associate, Sales, madison.martinez@example.com, 26, 57000
-Brandon Baker, 4937208651, Network Engineer, IT, brandon.baker@example.com, 32, 68000
+Maria Rodriguez,2093857123,Software Developer,IT,maria.rodriguez@example.com,29,60000
+Michelle Martinez,6731492085,Human Resources Manager,HR,michelle.martinez@example.com,33,68000
+Steven Walker,8163957204,UI/UX Designer,Design,steven.walker@example.com,29,60000
+Kayla Lewis,3259610478,Sales Representative,Sales,kayla.lewis@example.com,26,55000
+Dylan Baker,7293815604,Database Administrator,IT,dylan.baker@example.com,31,65000
+Melissa Gonzalez,6174832095,Customer Support Specialist,Customer Service,melissa.gonzalez@example.com,28,58000
+Jonathan Perez,9405721836,Product Manager,Product Management,jonathan.perez@example.com,34,71000
+Stephanie Hall,5820467139,Recruiter,HR,stephanie.hall@example.com,30,62000
+Jacob Wright,4738192650,Web Developer,IT,jacob.wright@example.com,32,67000
+Erica King,2095387461,Public Relations Specialist,PR,erica.king@example.com,27,59000
+Patrick Adams,6938174520,Systems Analyst,IT,patrick.adams@example.com,33,69000
+Emma Thompson,8152097346,UX Researcher,Design,emma.thompson@example.com,28,58000
+Ryan Lewis,6274910853,Business Development Manager,Business Development,ryan.lewis@example.com,34,70000
+Brianna Wright,5037261894,Customer Experience Specialist,Customer Service,brianna.wright@example.com,29,61000
+David Robinson,9405276183,Project Coordinator,Project Management,david.robinson@example.com,33,67000
