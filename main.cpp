@@ -1,12 +1,12 @@
 /*
 
-    Student Name:
-    Fadhlallah Almohammed    2230006097
-    Ahmed Alnaser 
-    Akbar Al-ali
-    Abbas Albasri
-    Ali Alzahrani
-    Abdulsalam Al-eissa
+    Student Names:          | ID:
+    Fadhlallah Almohammed   | 2230006097
+    Ahmed Al-Nasser         | 2220001575 
+    Akbar Al-ali            |
+    Abbas Albasri           | 
+    Ali Alzahrani           | 
+    Abdulsalam Al-eissa     |
 
 
 */
@@ -37,6 +37,9 @@ void displayRecords(string, staffInfo [], int&);
 
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
+
+void deleteItem(string, staffInfo [], int&);
+
 
 int main() {
 
@@ -141,6 +144,38 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     }
 }
 
+
+// Deleting Function
+void deleteItem(string id, staffInfo stfDetails[], int& noOfStaff, const string& fileName) {
+
+    int i = 0;
+    bool found = false;
+
+    // Search if ID matches on the records data file.
+    for (int i = 0; i < noOfStaff; i++) {
+        if (stfDetails[i].id == id) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) { //Shifting elements
+        for (int j = i; j < noOfStaff - 1; j++) {
+        stfDetails[j] = stfDetails[j + 1];
+        }
+
+
+    noOfStaff-- ; //Fix the Array size for new entries
+    cout << "ID : " << id << " has deleted successfully ☑️. \n\n";
+
+    saveData(fileName, stfDetails, noOfStaff);
+    cout << "Date saved successfully ✅ \n"; 
+
+    } else {
+        cout << "Record for this ID : " << id << " not found.";
+    }
+
+}
 
 void displayRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     
