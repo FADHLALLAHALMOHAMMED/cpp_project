@@ -66,30 +66,41 @@ int main() {
         userChoice = menu();
 
         switch (userChoice) {
-            case '1':
+            case '1': {
                 displayRecords(stfFileName,stfDetails, noOfStf);
                 break;
-            case '2':
+            }
+            case '2': {
                 // Add record function call goes here
                 break;
-            case '3':
+            }
+            case '3': {
                 // Update record function call goes here
                 break;
-            case '4':
+            }
+            case '4': {
                 isFound = searchingRecords(stfFileName, stfDetails, noOfStf);
                 break;
-            case '5':
-                // Delete record function call goes here
+            }
+            case '5': {
+                string idDelete;
+                cout << "Enter an ID to Delete : ";
+                cin >> idDelete;
+                deleteItem(idDelete, stfDetails, noOfStf, stfFileName);
                 break;
-            case '6':
+            }
+            case '6': {
                 // Sort records function call goes here
                 break;
-            case '7':
+            }
+            case '7': {
                 // Exit the program
                 break;
-            default:
+            }
+            default: {
                 cout << "\nInvalid input. Please enter a correct number!\n";
                 break;
+            }
         }
     } while (userChoice != '7');
 
@@ -159,6 +170,7 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
     if (staffFile.is_open()) {
         for (int i = 0; i < noOfStaff; i++) {
+            if (stfDetails[i].id != ""){
             staffFile << stfDetails[i].name << ", ";
             staffFile << stfDetails[i].id << ", ";
             staffFile << stfDetails[i].position << ", ";
@@ -169,8 +181,8 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
             if (i != noOfStaff-1) {
                 staffFile << endl;
+                }
             }
-            
         }
         staffFile.close();
     }
@@ -180,31 +192,32 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 // Deleting Function
 void deleteItem(string id, staffInfo stfDetails[], int& noOfStaff, const string& fileName) {
 
-    int i = 0;
     bool found = false;
+
+
+    // bool found = searchingRecords(fileName, stfDetails, noOfStaff);
 
     // Search if ID matches on the records data file.
     for (int i = 0; i < noOfStaff; i++) {
         if (stfDetails[i].id == id) {
             found = true;
-            break;
-        }
-    }
 
-    if (found) { //Shifting elements
         for (int j = i; j < noOfStaff - 1; j++) {
         stfDetails[j] = stfDetails[j + 1];
         }
 
+        noOfStaff-- ; //Fix the Array size for new entries
+        cout << "ID : " << id << " - has deleted successfully ☑️. \n\n";
+        saveData(fileName, stfDetails, noOfStaff);
+        cout << "Date saved successfully ✅ \n"; 
 
-    noOfStaff-- ; //Fix the Array size for new entries
-    cout << "ID : " << id << " has deleted successfully ☑️. \n\n";
+    return;
 
-    saveData(fileName, stfDetails, noOfStaff);
-    cout << "Date saved successfully ✅ \n"; 
+        }
+    }
 
-    } else {
-        cout << "Record for this ID : " << id << " not found.";
+    if (!found) { 
+        cout << "Record for this ID : " << id << " not found. \n\n";
     }
 
 }
