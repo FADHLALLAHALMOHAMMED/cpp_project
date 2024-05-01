@@ -30,18 +30,25 @@ struct staffInfo {
     double salary;
 };
 
+/* searchValues struct helps the function searchingRecord to 
+return boolean if the id is found and the index of the id element */
+struct varsToSearch {
+    bool found = false;
+    int index;
+};
+
 
 char menu();
 void loadData(string, staffInfo [], int&);
-void displayRecords(string, staffInfo [], int&);
+void displayRecord(string, staffInfo [], int&);
 void displayRecord(staffInfo[], int);
-bool searchingRecords(string, staffInfo[], int&);
+varsToSearch searchingRecord(string, staffInfo[], int&);
    
 
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
 
-void deleteItem(string, staffInfo [], int&, const string&);
+void deleteItem(staffInfo [], int&, const string&);
 
 
 int main() {
@@ -53,21 +60,21 @@ int main() {
     staffInfo stfDetails[LIMIT];
     char userChoice(0);
     bool isFound = false;
+    string idToDelete;
+    varsToSearch searchValues;
 
 
-    cout << "------- Welcome to the Staff System -------";
+    cout << "------- Welcome to the Staff System -------\n";
 
 
     loadData(stfFileName, stfDetails, noOfStf);
-
-    displayRecords(stfFileName, stfDetails, noOfStf);
 
     do {
         userChoice = menu();
 
         switch (userChoice) {
             case '1':
-                displayRecords(stfFileName,stfDetails, noOfStf);
+                displayRecord(stfFileName,stfDetails, noOfStf);
                 break;
             case '2':
                 // Add record function call goes here
@@ -76,10 +83,14 @@ int main() {
                 // Update record function call goes here
                 break;
             case '4':
-                isFound = searchingRecords(stfFileName, stfDetails, noOfStf);
+                searchValues = searchingRecord(stfFileName, stfDetails, noOfStf);
+
+                if (searchValues.found) {
+                    displayRecord(stfDetails, searchValues.index);
+                }
                 break;
             case '5':
-                // Delete record function call goes here
+                deleteItem(stfDetails, noOfStf, stfFileName);
                 break;
             case '6':
                 // Sort records function call goes here
@@ -159,12 +170,12 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
     if (staffFile.is_open()) {
         for (int i = 0; i < noOfStaff; i++) {
-            staffFile << stfDetails[i].name << ", ";
-            staffFile << stfDetails[i].id << ", ";
-            staffFile << stfDetails[i].position << ", ";
-            staffFile << stfDetails[i].department << ", ";
-            staffFile << stfDetails[i].email << ", ";
-            staffFile << stfDetails[i].age << ", ";
+            staffFile << stfDetails[i].name << ',';
+            staffFile << stfDetails[i].id << ',';
+            staffFile << stfDetails[i].position << ',';
+            staffFile << stfDetails[i].department << ',';
+            staffFile << stfDetails[i].email << ',';
+            staffFile << stfDetails[i].age << ',';
             staffFile << stfDetails[i].salary;
 
             if (i != noOfStaff-1) {
@@ -176,40 +187,7 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     }
 }
 
-
-// Deleting Function
-void deleteItem(string id, staffInfo stfDetails[], int& noOfStaff, const string& fileName) {
-
-    int i = 0;
-    bool found = false;
-
-    // Search if ID matches on the records data file.
-    for (int i = 0; i < noOfStaff; i++) {
-        if (stfDetails[i].id == id) {
-            found = true;
-            break;
-        }
-    }
-
-    if (found) { //Shifting elements
-        for (int j = i; j < noOfStaff - 1; j++) {
-        stfDetails[j] = stfDetails[j + 1];
-        }
-
-
-    noOfStaff-- ; //Fix the Array size for new entries
-    cout << "ID : " << id << " has deleted successfully ☑️. \n\n";
-
-    saveData(fileName, stfDetails, noOfStaff);
-    cout << "Date saved successfully ✅ \n"; 
-
-    } else {
-        cout << "Record for this ID : " << id << " not found.";
-    }
-
-}
-
-void displayRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) {
+void displayRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     
     loadData(fileName, stfDetails, noOfStaff);
 
@@ -242,11 +220,12 @@ void displayRecord(staffInfo stfDetails[], int index) {
 }
 
 
-bool searchingRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) { 
+varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) { 
    
     string search_for;
+    varsToSearch values;
 
-    cout << "What do you want to search for? ";
+    cout << "Please enter your ID: ";
     getline(cin, search_for); // Use getline to capture the entire line of input
 
 
@@ -264,12 +243,29 @@ bool searchingRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
     if (found) { 
         cout<<endl << "match found!" << endl;
-        displayRecord(stfDetails, index);
-          
-        return true;
+        values.found = true;
+        values.index = index;
     }   
     else {
         cout << "No match found\n";
-        return false; 
+        values.found = false; 
+    }
+    return values;
+}
+
+void deleteItem(staffInfo stfDetails[], int& noOfStaff, const string& fileName) {
+
+    varsToSearch searchValues;
+
+    searchValues = searchingRecord(fileName, stfDetails, noOfStaff);
+
+    if (searchValues.found) { //Shifting elements
+        for (int j = searchValues.index; j < noOfStaff - 1; j++) {
+        stfDetails[j] = stfDetails[j + 1];
+        }
+        
+        noOfStaff-- ; //Fix the Array size for new entries
+        cout << "ID : " << stfDetails[searchValues.index].id << " has been deleted successfully ☑️. \n\n";
+        saveData(fileName, stfDetails, noOfStaff);
     }
 }
