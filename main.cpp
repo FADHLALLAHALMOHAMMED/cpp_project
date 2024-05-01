@@ -86,9 +86,7 @@ int main() {
                 string idDelete;
                 cout << "Enter an ID to Delete : ";
                 cin >> idDelete;
-                // cin.ignore();
                 deleteItem(idDelete, stfDetails, noOfStf, stfFileName);
-                // displayRecords(stfFileName, stfDetails, noOfStf);
                 break;
             }
             case '6': {
@@ -212,7 +210,7 @@ void deleteItem(string id, staffInfo stfDetails[], int& noOfStaff, const string&
         cout << "ID : " << id << " - has deleted successfully ☑️. \n\n";
         saveData(fileName, stfDetails, noOfStaff);
         cout << "Date saved successfully ✅ \n"; 
-        
+
     return;
 
         }
