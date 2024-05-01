@@ -3,5 +3,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "fstream": "cpp"
-    }
+    },
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
+    ]
 }
