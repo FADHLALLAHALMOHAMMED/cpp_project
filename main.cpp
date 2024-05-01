@@ -34,6 +34,9 @@ struct staffInfo {
 char menu();
 void loadData(string, staffInfo [], int&);
 void displayRecords(string, staffInfo [], int&);
+void displayRecord(staffInfo[], int);
+bool searchingRecords(string, staffInfo[], int&);
+   
 
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
@@ -49,17 +52,46 @@ int main() {
     int noOfStf = 0;
     staffInfo stfDetails[LIMIT];
     char userChoice(0);
+    bool isFound = false;
 
 
     cout << "------- Welcome to the Staff System -------";
-
-    userChoice = menu();
 
 
     loadData(stfFileName, stfDetails, noOfStf);
 
     displayRecords(stfFileName, stfDetails, noOfStf);
 
+    do {
+        userChoice = menu();
+
+        switch (userChoice) {
+            case '1':
+                displayRecords(stfFileName,stfDetails, noOfStf);
+                break;
+            case '2':
+                // Add record function call goes here
+                break;
+            case '3':
+                // Update record function call goes here
+                break;
+            case '4':
+                isFound = searchingRecords(stfFileName, stfDetails, noOfStf);
+                break;
+            case '5':
+                // Delete record function call goes here
+                break;
+            case '6':
+                // Sort records function call goes here
+                break;
+            case '7':
+                // Exit the program
+                break;
+            default:
+                cout << "\nInvalid input. Please enter a correct number!\n";
+                break;
+        }
+    } while (userChoice != '7');
 
 
     return 0;
@@ -196,3 +228,48 @@ void displayRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     }
 }
 
+void displayRecord(staffInfo stfDetails[], int index) {
+
+    cout << "\n----------------------------------------" << '\n'
+         << "Name: " << stfDetails[index].name << "\n"
+         << "ID number: " << stfDetails[index].id << "\n"
+         << "Position: " << stfDetails[index].position << "\n"
+         << "Department: " << stfDetails[index].department << "\n"
+         << "Email: " << stfDetails[index].email << "\n"
+         << "Age: " << stfDetails[index].age << "\n"
+         << "Salary: " << stfDetails[index].salary << "\n\n"
+         << "---------------------------------------" << "\n\n";
+}
+
+
+bool searchingRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) { 
+   
+    string search_for;
+
+    cout << "What do you want to search for? ";
+    getline(cin, search_for); // Use getline to capture the entire line of input
+
+
+    int index = 0;
+    bool found = false; // Initialize found to false
+
+    // Search if ID matches on the records data file.
+    for (int i = 0; i < noOfStaff; i++) {
+        if (stfDetails[i].id == search_for) {
+            index=i;
+            found = true;
+            break;
+        }
+    }
+
+    if (found) { 
+        cout<<endl << "match found!" << endl;
+        displayRecord(stfDetails, index);
+          
+        return true;
+    }   
+    else {
+        cout << "No match found\n";
+        return false; 
+    }
+}
