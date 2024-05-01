@@ -38,7 +38,7 @@ void displayRecords(string, staffInfo [], int&);
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
 
-void deleteItem(string, staffInfo [], int&);
+void deleteItem(string, staffInfo [], int&, const string&);
 
 
 int main() {
