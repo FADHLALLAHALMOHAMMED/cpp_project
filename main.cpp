@@ -6,7 +6,7 @@
     Akbar Al-ali            |
     Abbas Albasri           | 
     Ali Alzahrani           | 
-    Abdulsalam Al-eissa     |
+    Abdulsalam Al-eissa     |2230003739
 
 
 */
@@ -40,6 +40,7 @@ void saveData(string, staffInfo [], int&);
 
 void deleteItem(string, staffInfo [], int&);
 
+void sortRecords(staffInfo stfDetails[], int noOfStaff);
 
 int main() {
 
@@ -196,3 +197,16 @@ void displayRecords(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     }
 }
 
+// Function to sort ID numbers in records using Bubble Sort
+void sortRecordsByID(staffInfo stfDetails[], int noOfStaff) {
+    for (int i = 0; i < noOfStaff - 1; i++) {
+        for (int j = 0; j < noOfStaff - i - 1; j++) {
+            if (stfDetails[j].id > stfDetails[j + 1].id) {
+                // Swap the records
+                staffInfo temp = stfDetails[j];
+                stfDetails[j] = stfDetails[j + 1];
+                stfDetails[j + 1] = temp;
+            }
+        }
+    }
+}
