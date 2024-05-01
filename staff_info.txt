@@ -1,2 +1,1 @@
-Mohammed Almohammed,1124465432,software engineer,computer science,aaaaaaaaaaaa@gmail.com,32,20000
-Ali Ahmed,1124425453,architecture engineer,engineering,bbbbbbbbbbb@gmail.com,42,34000
+Ali Ahmed, 1124425453, architecture engineer, engineering, bbbbbbbbbbb@gmail.com, 42, 34000
