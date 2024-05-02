@@ -16,6 +16,7 @@
 #include <string>
 #include <cctype>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 
 
@@ -37,21 +38,19 @@ struct varsToSearch {
     int index;
 };
 
-
+// functions' prototypes
 char menu();
 void loadData(string, staffInfo [], int&);
 void displayRecord(string, staffInfo [], int&);
 void displayRecord(staffInfo[], int);
 void addRecord(string, staffInfo [], int&);
 varsToSearch searchingRecord(string, staffInfo[], int&);
-   
-
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
-
 void deleteItem(staffInfo [], int&, const string&);
-
+// sortRecords function sorts the ID numbers in records using Bubble Sort
 void sortRecords(staffInfo stfDetails[], int noOfStaff);
+
 
 int main() {
 
@@ -95,7 +94,7 @@ int main() {
                 deleteItem(stfDetails, noOfStf, stfFileName);
                 break;
             case '6':
-                // Sort records function call goes here
+                sortRecords(stfDetails, noOfStf);
                 break;
             case '7':
                 // Exit the program
@@ -106,6 +105,7 @@ int main() {
         }
     } while (userChoice != '7');
 
+    saveData(stfFileName, stfDetails, noOfStf);
 
     return 0;
 }
@@ -329,21 +329,29 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
     
     noOfStf++;
     saveData(fileName, stfDetails, noOfStf);
+
+    cout << "\nThe employee has been added successfuly \n\n";
+
 }
 
-// Function to sort ID numbers in records using Bubble Sort
 void sortRecords(staffInfo stfDetails[], int noOfStaff) {
+    
     for (int i = 0; i < noOfStaff - 1; i++) {
-        for (int j = 0; j < noOfStaff - i - 1; j++) {
-            if (stfDetails[j].id > stfDetails[j + 1].id) {
-                // Swap the records
-                staffInfo temp = stfDetails[j];
-                stfDetails[j] = stfDetails[j + 1];
-                stfDetails[j + 1] = temp;
+        for (int j = i + 1; j < noOfStaff; j++) {
+            if (stfDetails[i].name > stfDetails[j].name) {
+                swap(stfDetails[i], stfDetails[j]);
             }
         }
     }
-}
-=======
-    cout << "\nThe employee has been added successfuly \n\n";
+
+    // for (int i = 0; i < noOfStaff - 1; i++) {
+    //     for (int j = 0; j < noOfStaff - i - 1; j++) {
+    //         if (stfDetails[j].id > stfDetails[j + 1].id) {
+    //             // Swap the records
+    //             staffInfo temp = stfDetails[j];
+    //             stfDetails[j] = stfDetails[j + 1];
+    //             stfDetails[j + 1] = temp;
+    //         }
+    //     }
+    // }
 }
