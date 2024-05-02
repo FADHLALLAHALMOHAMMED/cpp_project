@@ -9,7 +9,7 @@ Melissa Gonzalez,6174832095,Customer Support Specialist,Customer Service,melissa
 Jonathan Perez,9405721836,Product Manager,Product Management,jonathan.perez@example.com,34,71000
 Ryan Lewis,6274910853,Business Development Manager,Business Development,ryan.lewis@example.com,34,70000
 Stephanie Hall,5820467139,Recruiter,HR,stephanie.hall@example.com,30,62000
-Jacob Wright,4738192650,Web Developer,IT,jacob.wright@example.com,32,67000
+Ali Mohammed,4738192650,Web Developer,Engineering Unit,Engin23@gmail.com,55,100000
 Patrick Adams,6938174520,Systems Analyst,IT,patrick.adams@example.com,33,69000
 Emma Thompson,8152097346,UX Researcher,Design,emma.thompson@example.com,28,58000
-Brianna Wright,5037261894,Customer Experience Specialist,Customer Service,brianna.wright@example.com,29,61000
+Brianna Wright,5037261894,IT Specialist,Customer Service,brianna.wright@example.com,29,61000
