@@ -359,16 +359,37 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 }
 
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
-    
-    for (int i = 0; i < noOfStaff - 1; i++) {
+  char sortType;
+  cout << "\nSort by (a - Alphabetically, n - By ID): ";
+  cin >> sortType;
+
+  bool sortByName = true;
+  if (tolower(sortType) == 'n') {
+    sortByName = false;}
+
+if(sortByName){
+// Sort alphabetically by name (case-insensitive)
+     for (int i = 0; i < noOfStaff - 1; i++) {
         for (int j = i + 1; j < noOfStaff; j++) {
             if (stfDetails[i].name > stfDetails[j].name) {
                 swap(stfDetails[i], stfDetails[j]);
             }
         }
     }
+}
 
+else{
+// Sort by ID in ascending order
+for (int i = 0; i < noOfStaff - 1; i++) {
+        for (int j = i + 1; j < noOfStaff; j++) {
+            if (stfDetails[i].id > stfDetails[j].id) {
+                swap(stfDetails[i], stfDetails[j]);
+                }
+            }   
+        }
+    }
     saveData(fileName, stfDetails, noOfStaff);
+     cout << "\nData sorted successfully!\n";
 }
 
 void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
