@@ -5,8 +5,8 @@
     Ahmed Al-Nasser         | 2220001575 
     Akbar Al-ali            |
     Abbas Albasri           | 
-    Ali Alzahrani           | 
-    Abdulsalam Al-eissa     |2230003739
+    Ali Alzahrani           | 2230007267
+    Abdulsalam Al-eissa     | 2230003739
 
 
 */
@@ -233,22 +233,36 @@ varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfS
    
     string search_for;
     varsToSearch values;
-
-    cout << "Please enter your ID: ";
-    getline(cin, search_for); // Use getline to capture the entire line of input
-
-
     int index = 0;
     bool found = false; // Initialize found to false
-
-    // Search if ID matches on the records data file.
-    for (int i = 0; i < noOfStaff; i++) {
-        if (stfDetails[i].id == search_for) {
-            index=i;
-            found = true;
+ while (true) {
+        string check;
+        bool isCorrect(true);
+        cout << "Enter the ID number: ";
+        cin >> check;
+        cin.ignore();
+        for (int i : check) {
+            if (!isdigit(i)) {
+                isCorrect = false;
+                break;
+            }
+        }
+        if (isCorrect) {
+            for (int i = 0; i < noOfStaff; i++) {
+               if (stfDetails[i].id == check) {
+               index=i;
+               found = true;
+               break;
+            } 
+             
+            }
             break;
         }
+     else {
+            cout << "Invalid. Please enter a correct number!\n\n";
+        }
     }
+    // Search if ID matches on the records data file.
 
     if (found) { 
         cout<<endl << "match found!" << endl;
