@@ -21,6 +21,8 @@
 using namespace std;
 
 
+const string statFileName = "statistical_report.txt";
+
 struct staffInfo {
 
     string name;
@@ -56,13 +58,15 @@ void saveData(string, staffInfo [], int&);
 void deleteItem(staffInfo [], int&, const string&);
 // sortRecords function sorts the ID numbers in records using Bubble Sort
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff);
+/*statisticalReport function provides a statistics about the employees data
+ given in the "staff_info.txt" file*/
+void statisticalReport(string, staffInfo [], int&);
 
 
 int main() {
 
     const string stfFileName = "staff_info.txt";
     const string beckupFileName = "backup_data.txt";
-    const string statFileName = "statistical_report.txt";
 
     const int LIMIT = 1000;
     int noOfStf = 0;
@@ -195,6 +199,8 @@ void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
         }
         staffFile.close();
     }
+
+    statisticalReport(statFileName, stfDetails, noOfStaff);
 }
 
 void displayRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
@@ -289,7 +295,7 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
         bool isCorrect(true);
         cout << "Enter the ID number: ";
         cin >> check;
-        for (int i : check) {
+        for (int i : check) { // 112345
             if (!isdigit(i)) {
                 isCorrect = false;
                 break;
@@ -358,17 +364,43 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
 }
 
+
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
-    
-    for (int i = 0; i < noOfStaff - 1; i++) {
-        for (int j = i + 1; j < noOfStaff; j++) {
-            if (stfDetails[i].name > stfDetails[j].name) {
-                swap(stfDetails[i], stfDetails[j]);
+    char sortType;
+    cout << "\n Choose from the following to sort: " << endl
+        << "a - sort alphabetically" << endl
+        << "b - sort by ID" << endl
+        << "Enter your choice: ";
+    cin >> sortType;
+    cin.ignore();
+
+    bool sortByName = true;
+    if (tolower(sortType) == 'a') {
+        sortByName = false;}
+
+        if(sortByName){
+        // Sort alphabetically by name (case-insensitive)
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].name > stfDetails[j].name) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
+                }
             }
-        }
     }
 
-    saveData(fileName, stfDetails, noOfStaff);
+    else{
+    // Sort by ID in ascending order
+    for (int i = 0; i < noOfStaff - 1; i++) {
+            for (int j = i + 1; j < noOfStaff; j++) {
+                if (stfDetails[i].id > stfDetails[j].id) {
+                    swap(stfDetails[i], stfDetails[j]);
+                    }
+                }   
+            }
+        }
+        saveData(fileName, stfDetails, noOfStaff);
+        cout << "\nData sorted successfully!\n";
 }
 
 void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
@@ -473,5 +505,20 @@ void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
             cout << "Employee not found!\n\n";
         }
     saveData(fileName, stfDetails, noOfStaff);
+}
+
+void statisticalReport(string fileName, staffInfo stfDetails[], int& noOfStaff) {
+
+    time_t timeNow = time(0);
+    tm *currentTime = localtime(&timeNow);
+
+    ofstream statFile(fileName);
+
+    if (statFile.is_open()) {
+        statFile << "Number of Employees: " << noOfStaff << endl
+                 << "Last update: " << currentTime->tm_mday << "-" << currentTime->tm_mon << "-" << (currentTime->tm_year + 1900) << endl
+                 << "Time of last update: " << currentTime->tm_hour;
+    }
+
 }
 
