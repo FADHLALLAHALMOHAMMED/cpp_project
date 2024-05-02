@@ -17,6 +17,7 @@
 #include <cctype>
 #include <fstream>
 #include <algorithm>
+#include <ctime>
 using namespace std;
 
 
@@ -54,12 +55,14 @@ varsToSearch searchingRecord(string, staffInfo[], int&);
 void saveData(string, staffInfo [], int&);
 void deleteItem(staffInfo [], int&, const string&);
 // sortRecords function sorts the ID numbers in records using Bubble Sort
-void sortRecords(staffInfo stfDetails[], int noOfStaff);
+void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff);
 
 
 int main() {
 
     const string stfFileName = "staff_info.txt";
+    const string beckupFileName = "backup_data.txt";
+    const string statFileName = "statistical_report.txt";
 
     const int LIMIT = 1000;
     int noOfStf = 0;
@@ -99,7 +102,7 @@ int main() {
                 deleteItem(stfDetails, noOfStf, stfFileName);
                 break;
             case '6':
-                sortRecords(stfDetails, noOfStf);
+                sortRecords(stfFileName, stfDetails, noOfStf);
                 break;
             case '7':
                 // Exit the program
@@ -355,7 +358,7 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
 }
 
-void sortRecords(staffInfo stfDetails[], int noOfStaff) {
+void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
     
     for (int i = 0; i < noOfStaff - 1; i++) {
         for (int j = i + 1; j < noOfStaff; j++) {
@@ -365,16 +368,7 @@ void sortRecords(staffInfo stfDetails[], int noOfStaff) {
         }
     }
 
-    // for (int i = 0; i < noOfStaff - 1; i++) {
-    //     for (int j = 0; j < noOfStaff - i - 1; j++) {
-    //         if (stfDetails[j].id > stfDetails[j + 1].id) {
-    //             // Swap the records
-    //             staffInfo temp = stfDetails[j];
-    //             stfDetails[j] = stfDetails[j + 1];
-    //             stfDetails[j + 1] = temp;
-    //         }
-    //     }
-    // }
+    saveData(fileName, stfDetails, noOfStaff);
 }
 
 void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
