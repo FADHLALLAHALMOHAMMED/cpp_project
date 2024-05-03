@@ -512,12 +512,19 @@ void statisticalReport(string fileName, staffInfo stfDetails[], int& noOfStaff) 
     time_t timeNow = time(0);
     tm *currentTime = localtime(&timeNow);
 
+    int totalSalaries(0);
+
+    for (int i = 0; i < noOfStaff; i++) {
+        totalSalaries += stfDetails[i].salary;
+    }
+
     ofstream statFile(fileName);
 
     if (statFile.is_open()) {
         statFile << "Number of Employees: " << noOfStaff << endl
                  << "Last update: " << currentTime->tm_mday << "-" << currentTime->tm_mon << "-" << (currentTime->tm_year + 1900) << endl
-                 << "Time of last update: " << currentTime->tm_hour;
+                 << "Time of last update (GMT+3): " << currentTime->tm_hour << ":" << currentTime->tm_min << endl
+                 << "Total salaries of employees: " << totalSalaries << " SR" << endl;
     }
 
 }

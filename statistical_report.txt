@@ -1,5 +1,4 @@
 Number of Employees: 14
-Last update: 2-4-2024
-Time of last update: 
-Total employees salaries:
-
+Last update: 3-4-2024
+Time of last update (GMT+3): 4:27
+Total salaries of employees: 921000 SR
