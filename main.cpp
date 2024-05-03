@@ -358,40 +358,96 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
 }
 
+
+//Sorts the staff records based on the specified criteria.
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
-  char sortType;
-  cout << "\nSort by (a - Alphabetically, n - By ID): ";
-  cin >> sortType;
+    char sortType;
+    do{    cout << "\nSorting by:\n"
+         << "a. Name\n"
+         << "b. ID\n"
+         << "c. Department\n"
+         << "d. salary\n"
+         << "e. Age\n"
+         << "f. Exit\n"
+         << "Enter your choice: ";
+    cin >> sortType;
+    cin.ignore();
 
-  bool sortByName = true;
-  if (tolower(sortType) == 'n') {
-    sortByName = false;}
-
-if(sortByName){
-// Sort alphabetically by name (case-insensitive)
-     for (int i = 0; i < noOfStaff - 1; i++) {
-        for (int j = i + 1; j < noOfStaff; j++) {
-            if (stfDetails[i].name > stfDetails[j].name) {
-                swap(stfDetails[i], stfDetails[j]);
-            }
-        }
-    }
-}
-
-else{
-// Sort by ID in ascending order
-for (int i = 0; i < noOfStaff - 1; i++) {
-        for (int j = i + 1; j < noOfStaff; j++) {
-            if (stfDetails[i].id > stfDetails[j].id) {
-                swap(stfDetails[i], stfDetails[j]);
+    switch (tolower(sortType)) {
+        case 'a':
+            // Sort alphabetically by name (case-insensitive)
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].name > stfDetails[j].name) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
                 }
-            }   
-        }
-    }
-    saveData(fileName, stfDetails, noOfStaff);
-     cout << "\nData sorted successfully!\n";
-}
+            }
+            cout << "\nData sorted successfully!\n";
+            break;
 
+        case 'b':
+            // Sort by ID in ascending order
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].id > stfDetails[j].id) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
+                }
+            }
+            cout << "\nData sorted successfully!\n";
+            break;
+
+        case 'c':
+            // Sort by department in alphabetical order
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].department > stfDetails[j].department) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
+                }
+            }
+            cout << "\nData sorted successfully!\n";
+            break;
+
+        case 'd':
+            // Sort by salary in ascending order
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].salary > stfDetails[j].salary) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
+                }
+            }
+            cout << "\nData sorted successfully!\n";
+            break;
+
+        case 'e':
+            // Sort by age in ascending order
+            for (int i = 0; i < noOfStaff - 1; i++) {
+                for (int j = i + 1; j < noOfStaff; j++) {
+                    if (stfDetails[i].age > stfDetails[j].age) {
+                        swap(stfDetails[i], stfDetails[j]);
+                    }
+                }
+            }
+            cout << "\nData sorted successfully!\n";
+            break;
+
+        case 'f':
+            // Exit sorting
+            cout << "\nYou exited successfully.\n";
+            return;
+
+        default:
+            cout << "Invalid sorting option. Please try again." << endl;
+        break;
+    }
+
+    saveData(fileName, stfDetails, noOfStaff);
+        }
+    while (tolower(sortType) != 'f');
+            }
 void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
     string idEmployee;
