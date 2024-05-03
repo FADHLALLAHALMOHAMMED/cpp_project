@@ -125,9 +125,10 @@ int main() {
 
 char menu() {
 
-    char choice;
+    
 
     while (true) {
+        string choice;
         cout << "\nMenu:"   << endl
             << "1 - Display the records" << endl
             << "2 - Add a record"        << endl
@@ -138,15 +139,14 @@ char menu() {
             << "7 - Exit the program"    << endl
             << endl
             << "Please choose from the menu: ";
-        choice = cin.get();
-        cin.ignore();
+        getline(cin, choice);
+        
 
-        if (choice >= '1' && choice <= '7') {
-            return choice;
+        if (choice.length() == 1) {
+            return choice[0];
         }
         else {
             cout << "\nInvalid input. Please enter a correct number!\n";
-        
         }
     }
 }
@@ -362,6 +362,102 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
     cout << "\nThe employee has been added successfuly \n\n";
 
+}
+
+//Sorts the staff records based on the specified criteria.
+void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
+
+    bool valid(true);
+    string sortType;
+    do {    
+        valid = true;
+        cout << "\nSorting by:\n"
+            << "a. Name\n"
+            << "b. ID\n"
+            << "c. Department\n"
+            << "d. salary\n"
+            << "e. Age\n"
+            << "f. Exit\n"
+            << "Enter your choice: ";
+        getline(cin, sortType);
+
+        if (sortType.length() == 1) {
+            switch (tolower(sortType[0])) {
+                case 'a':
+                    // Sort alphabetically by name (case-insensitive)
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].name > stfDetails[j].name) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\nData sorted successfully!\n";
+                    break;
+
+                case 'b':
+                    // Sort by ID in ascending order
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].id > stfDetails[j].id) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\nData sorted successfully!\n";
+                    break;
+
+                case 'c':
+                    // Sort by department in alphabetical order
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].department > stfDetails[j].department) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\nData sorted successfully!\n";
+                    break;
+
+                case 'd':
+                    // Sort by salary in ascending order
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].salary > stfDetails[j].salary) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\nData sorted successfully!\n";
+                    break;
+
+                case 'e':
+                    // Sort by age in ascending order
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].age > stfDetails[j].age) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\nData sorted successfully!\n";
+                    break;
+
+                default:
+                    cout << "\nInvalid. Please enter a correct letter!" << endl;
+                    valid = false;
+                break;
+            }
+        } else {
+            cout << "\nInvalid. Please enter a single letter!" << endl;
+            valid = false;
+        }
+
+        saveData(fileName, stfDetails, noOfStaff);
+
+    } while (!valid);
+
+    
 }
 
 
