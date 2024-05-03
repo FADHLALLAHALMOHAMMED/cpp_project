@@ -3,11 +3,10 @@
     Student Names:          | ID:
     Fadhlallah Almohammed   | 2230006097
     Ahmed Al-Nasser         | 2220001575 
-    Akbar Al-ali            |
-    Abbas Albasri           | 
+    Akbar Al-ali            | 2230005027
+    Abbas Albasri           | 2230000457
     Ali Alzahrani           | 2230007267
     Abdulsalam Al-eissa     | 2230003739
-
 
 */
 
@@ -43,7 +42,9 @@ struct varsToSearch {
 
 // functions' prototypes
 char menu();
+/* loadData loads the employees data into the array */ 
 void loadData(string, staffInfo [], int&);
+void backUpData(string, string);
 void displayRecord(string, staffInfo [], int&);
 void displayRecord(staffInfo[], int);
 void addRecord(string, staffInfo [], int&);
@@ -56,17 +57,17 @@ varsToSearch searchingRecord(string, staffInfo[], int&);
 // saveData function saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
 void deleteItem(staffInfo [], int&, const string&);
-// sortRecords function sorts the ID numbers in records using Bubble Sort
+// sortRecords function sorts a specific category in records using Bubble Sort
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff);
 /*statisticalReport function provides a statistics about the employees data
- given in the "staff_info.txt" file*/
+given in the "staff_info.txt" file*/
 void statisticalReport(string, staffInfo [], int&);
 
 
 int main() {
 
     const string stfFileName = "staff_info.txt";
-    const string beckupFileName = "backup_data.txt";
+    const string backupFileName = "backup_data.txt";
 
     const int LIMIT = 1000;
     int noOfStf = 0;
@@ -79,7 +80,7 @@ int main() {
 
     cout << "------- Welcome to the Staff System -------\n";
 
-
+    backUpData(stfFileName, backupFileName);
     loadData(stfFileName, stfDetails, noOfStf);
 
     do {
@@ -212,36 +213,36 @@ void displayRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     for (int i = 0; i < noOfStaff; i++) {
         
         cout << "Name: " << stfDetails[i].name << "\n"
-             << "ID number: " << stfDetails[i].id << "\n"
-             << "Position: " << stfDetails[i].position << "\n"
-             << "Department: " << stfDetails[i].department << "\n"
-             << "Email: " << stfDetails[i].email << "\n"
-             << "Age: " << stfDetails[i].age << "\n"
-             << "Salary: " << stfDetails[i].salary << "\n\n"
-             << "---------------------------------------" << "\n\n";
+            << "ID number: " << stfDetails[i].id << "\n"
+            << "Position: " << stfDetails[i].position << "\n"
+            << "Department: " << stfDetails[i].department << "\n"
+            << "Email: " << stfDetails[i].email << "\n"
+            << "Age: " << stfDetails[i].age << "\n"
+            << "Salary: " << stfDetails[i].salary << "\n\n"
+            << "---------------------------------------" << "\n\n";
     }
 }
 
 void displayRecord(staffInfo stfDetails[], int index) {
 
     cout << "\n----------------------------------------" << '\n'
-         << "Name: " << stfDetails[index].name << "\n"
-         << "ID number: " << stfDetails[index].id << "\n"
-         << "Position: " << stfDetails[index].position << "\n"
-         << "Department: " << stfDetails[index].department << "\n"
-         << "Email: " << stfDetails[index].email << "\n"
-         << "Age: " << stfDetails[index].age << "\n"
-         << "Salary: " << stfDetails[index].salary << "\n\n"
-         << "---------------------------------------" << "\n\n";
+        << "Name: " << stfDetails[index].name << "\n"
+        << "ID number: " << stfDetails[index].id << "\n"
+        << "Position: " << stfDetails[index].position << "\n"
+        << "Department: " << stfDetails[index].department << "\n"
+        << "Email: " << stfDetails[index].email << "\n"
+        << "Age: " << stfDetails[index].age << "\n"
+        << "Salary: " << stfDetails[index].salary << "\n\n"
+        << "---------------------------------------" << "\n\n";
 }
 
 varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) { 
-   
+
     string search_for;
     varsToSearch values;
     int index = 0;
     bool found = false; // Initialize found to false
- while (true) {
+    while (true) {
         string check;
         bool isCorrect(true);
         cout << "Enter the ID number: ";
@@ -255,16 +256,16 @@ varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfS
         }
         if (isCorrect) {
             for (int i = 0; i < noOfStaff; i++) {
-               if (stfDetails[i].id == check) {
-               index=i;
-               found = true;
-               break;
+                if (stfDetails[i].id == check) {
+                index=i;
+                found = true;
+                break;
             } 
-             
+            
             }
             break;
         }
-     else {
+    else {
             cout << "Invalid. Please enter a correct number!\n\n";
         }
     }
@@ -300,7 +301,7 @@ void deleteItem(staffInfo stfDetails[], int& noOfStaff, const string& fileName) 
 }
 
 void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
-   
+
     cout << "Enter the full name of the employee: ";
     getline(cin, stfDetails[noOfStf].name);
 
@@ -378,7 +379,6 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
 }
 
-//Sorts the staff records based on the specified criteria.
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
 
     bool valid(true);
@@ -585,19 +585,37 @@ void statisticalReport(string fileName, staffInfo stfDetails[], int& noOfStaff) 
     tm *currentTime = localtime(&timeNow);
 
     int totalSalaries(0);
+    int avgAge(0);
 
+
+    //calculate average age and summation of salaries
     for (int i = 0; i < noOfStaff; i++) {
         totalSalaries += stfDetails[i].salary;
+        avgAge += stfDetails[i].age;
     }
+    avgAge /= noOfStaff;
 
     ofstream statFile(fileName);
 
     if (statFile.is_open()) {
         statFile << "Number of Employees: " << noOfStaff << endl
-                 << "Last update: " << currentTime->tm_mday << "-" << currentTime->tm_mon << "-" << (currentTime->tm_year + 1900) << endl
-                 << "Time of last update (GMT+3): " << currentTime->tm_hour << ":" << currentTime->tm_min << endl
-                 << "Total salaries of employees: " << totalSalaries << " SR" << endl;
+                << "Last update: " << currentTime->tm_mday << "-" << currentTime->tm_mon << "-" << (currentTime->tm_year + 1900) << endl
+                << "Time of last update (GMT+3): " << currentTime->tm_hour << ":" << currentTime->tm_min << endl
+                << "Total salaries of employees: " << totalSalaries << " SR" << endl
+                << "Average age of employees: " << avgAge << " y/o" << endl;
     }
-
 }
 
+
+void backUpData(string fileName, string backupFileName) {
+    ofstream backupFile(backupFileName);
+    ifstream originFile(fileName);
+
+    string line;
+    do {
+        if (originFile.is_open() && backupFile.is_open()) {
+            getline(originFile, line);
+            backupFile << line << endl;
+        }
+    } while (!originFile.eof());
+}
