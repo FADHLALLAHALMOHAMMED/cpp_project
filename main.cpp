@@ -78,7 +78,7 @@ int main() {
     varsToSearch searchValues;
 
 
-    cout << "------- Welcome to the Staff System -------\n";
+    cout << "\n    -------- WELCOME TO THE STAFF SYSTEM --------    \n";
 
     backUpData(stfFileName, backupFileName);
     loadData(stfFileName, stfDetails, noOfStf);
@@ -120,6 +120,26 @@ int main() {
 
     saveData(stfFileName, stfDetails, noOfStf);
 
+    cout << "\n\n"
+        << "==============================================================================================\n"
+        << "|                                                                                            |\n"
+        << "|    Thank you for using our Staff System! We hope it served you well.                       |\n"
+        << "|                                                                                            |\n"
+        << "|    ----------------------------------TEAM DEVELOPERS----------------------------------     |\n"
+        << "|                                                                                            |\n"
+        << "|   => Fadhlallah Almohammed                                                                 |\n"
+        << "|   => Ali Alzahrani                                                                         |\n"
+        << "|   => Ahmed Al-Nasser                                                                       |\n"
+        << "|   => Abdulsalam al-eissa                                                                   |\n"
+        << "|   => Akbar Al-ali                                                                          |\n"
+        << "|   => Abbas albasri                                                                         |\n"
+        << "|                                                                                            |\n"
+        << "|   We appreciate your support and look forward to serving you again!                        |\n"
+        << "|                                                                                            |\n"
+        << "==============================================================================================\n"
+        << "\n\n\n";
+
+
     return 0;
 }
 
@@ -130,14 +150,14 @@ char menu() {
 
     while (true) {
         string choice;
-        cout << "\nMenu:"   << endl
-            << "1 - Display the records" << endl
-            << "2 - Add a record"        << endl
-            << "3 - Update a record"     << endl
-            << "4 - Search for a record" << endl
-            << "5 - Delete a record"     << endl
-            << "6 - Sort the records"    << endl
-            << "7 - Exit the program"    << endl
+        cout << "\n    ---- Menu ----    " << endl
+            << " 1 - Display the records" << endl
+            << " 2 - Add a record"        << endl
+            << " 3 - Update a record"     << endl
+            << " 4 - Search for a record" << endl
+            << " 5 - Delete a record"     << endl
+            << " 6 - Sort the records"    << endl
+            << " 7 - Exit the program"    << endl
             << endl
             << "Please choose from the menu: ";
         getline(cin, choice);
@@ -226,13 +246,13 @@ void displayRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 void displayRecord(staffInfo stfDetails[], int index) {
 
     cout << "\n----------------------------------------" << '\n'
-        << "Name: " << stfDetails[index].name << "\n"
-        << "ID number: " << stfDetails[index].id << "\n"
-        << "Position: " << stfDetails[index].position << "\n"
-        << "Department: " << stfDetails[index].department << "\n"
-        << "Email: " << stfDetails[index].email << "\n"
-        << "Age: " << stfDetails[index].age << "\n"
-        << "Salary: " << stfDetails[index].salary << "\n\n"
+        << " Name: " << stfDetails[index].name << "\n"
+        << " ID number: " << stfDetails[index].id << "\n"
+        << " Position: " << stfDetails[index].position << "\n"
+        << " Department: " << stfDetails[index].department << "\n"
+        << " Email: " << stfDetails[index].email << "\n"
+        << " Age: " << stfDetails[index].age << "\n"
+        << " Salary: " << stfDetails[index].salary << "\n\n"
         << "---------------------------------------" << "\n\n";
 }
 
@@ -241,11 +261,11 @@ varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfS
     string search_for;
     varsToSearch values;
     int index = 0;
-    bool found = false; // Initialize found to false
+    bool found = false;
     while (true) {
         string check;
         bool isCorrect(true);
-        cout << "Enter the ID number: ";
+        cout << "\n - Enter the ID number: ";
         cin >> check;
         cin.ignore();
         for (int i : check) {
@@ -266,18 +286,18 @@ varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfS
             break;
         }
     else {
-            cout << "Invalid. Please enter a correct number!\n\n";
+            cout << "\n X Invalid. Please enter a correct number! X \n\n";
         }
     }
-    // Search if ID matches on the records data file.
 
+    // Search if ID matches on the records data file.
     if (found) { 
-        cout<<endl << "match found!" << endl;
+        cout<<endl << "\n match found! \n" << endl;
         values.found = true;
         values.index = index;
     }   
     else {
-        cout << "No match found\n";
+        cout << "\n ? No match found ? \n\n";
         values.found = false; 
     }
     return values;
@@ -295,22 +315,25 @@ void deleteItem(staffInfo stfDetails[], int& noOfStaff, const string& fileName) 
         }
         
         noOfStaff-- ; //Fix the Array size for new entries
-        cout << "ID : " << stfDetails[searchValues.index].id << " has been deleted successfully ✓ \n\n";
+        cout << "\n ID - " << stfDetails[searchValues.index].id << " - has been deleted successfully \n\n";
         saveData(fileName, stfDetails, noOfStaff);
     }
 }
 
 void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
 
-    cout << "Enter the full name of the employee: ";
+    cout << "\n    ---- Adding a Record ----    \n\n";
+
+    cout << " - Enter the full name of the employee: ";
     getline(cin, stfDetails[noOfStf].name);
 
     while (true) {
         string check;
         bool isCorrect(true);
-        cout << "Enter the ID number: ";
+        cout << " - Enter the ID number: ";
         cin >> check;
-        for (int i : check) { // 112345
+        cin.ignore();
+        for (int i : check) { 
             if (!isdigit(i)) {
                 isCorrect = false;
                 break;
@@ -320,25 +343,26 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
             stfDetails[noOfStf].id = check;
             break;
         } else {
-            cout << "Invalid. Please enter a correct number!\n\n";
+            cout << "\n X Invalid. Please enter a correct number! X \n\n";
         }
     }
 
-    cout << "Enter the current position: ";
+    cout << " - Enter the current position: ";
     getline(cin, stfDetails[noOfStf].position);
 
-    cout << "Enter the department: ";
+    cout << " - Enter the department: ";
     getline(cin, stfDetails[noOfStf].department);
     
-    cout << "Enter the official email address: ";
+    cout << " - Enter the official email address: ";
     getline(cin, stfDetails[noOfStf].email);
 
     
     while (true) {
         string check;
         bool isCorrect(true);
-        cout << "Enter the age: ";
+        cout << " - Enter the age: ";
         cin >> check;
+        cin.ignore();
         for (int i : check) {
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -349,15 +373,16 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
             stfDetails[noOfStf].age = stoi(check);
             break;
         } else {
-            cout << "Invalid. Please enter a correct number!\n\n";
+            cout << "\n X Invalid. Please enter a correct number! X \n\n";
         }
     }
     
     while (true) {
         string check;
         bool isCorrect(true);
-        cout << "Enter the current salary: ";
+        cout << " - Enter the current salary: ";
         cin >> check;
+        cin.ignore();
         for (int i : check) {
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -368,14 +393,14 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
             stfDetails[noOfStf].salary = stoi(check);
             break;
         } else {
-            cout << "Invalid. Please enter a correct number!\n\n";
+            cout << "\n X Invalid. Please enter a correct number! X \n\n";
         }
     }
     
     noOfStf++;
     saveData(fileName, stfDetails, noOfStf);
 
-    cout << "\nThe employee has been added successfuly \n\n";
+    cout << "\n The employee has been added successfuly \n\n";
 
 }
 
@@ -385,20 +410,19 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
     string sortType;
     do {    
         valid = true;
-        cout << "\nSorting by:\n"
-            << "a. Name\n"
-            << "b. ID\n"
-            << "c. Department\n"
-            << "d. salary\n"
-            << "e. Age\n"
-            << "f. Exit\n"
-            << "Enter your choice: ";
+        cout << "\n    ---- Sort Options ----    \n"
+            << " a. Name\n"
+            << " b. ID\n"
+            << " c. Department\n"
+            << " d. salary\n"
+            << " e. Age\n"
+            << "\n - Enter your choice: ";
         getline(cin, sortType);
 
         if (sortType.length() == 1) {
             switch (tolower(sortType[0])) {
                 case 'a':
-                    // Sort alphabetically by name (case-insensitive)
+                    // Sort  by name alphabetically
                     for (int i = 0; i < noOfStaff - 1; i++) {
                         for (int j = i + 1; j < noOfStaff; j++) {
                             if (stfDetails[i].name > stfDetails[j].name) {
@@ -406,7 +430,7 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                             }
                         }
                     }
-                    cout << "\nData sorted successfully!\n";
+                    cout << "\n Data sorted successfully! \n";
                     break;
 
                 case 'b':
@@ -418,11 +442,11 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                             }
                         }
                     }
-                    cout << "\nData sorted successfully!\n";
+                    cout << "\n Data sorted successfully! \n";
                     break;
 
                 case 'c':
-                    // Sort by department in alphabetical order
+                    // Sort by department alphabetically
                     for (int i = 0; i < noOfStaff - 1; i++) {
                         for (int j = i + 1; j < noOfStaff; j++) {
                             if (stfDetails[i].department > stfDetails[j].department) {
@@ -430,7 +454,7 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                             }
                         }
                     }
-                    cout << "\nData sorted successfully!\n";
+                    cout << "\n Data sorted successfully! \n";
                     break;
 
                 case 'd':
@@ -442,7 +466,7 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                             }
                         }
                     }
-                    cout << "\nData sorted successfully!\n";
+                    cout << "\n Data sorted successfully! \n";
                     break;
 
                 case 'e':
@@ -454,16 +478,16 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                             }
                         }
                     }
-                    cout << "\nData sorted successfully!\n";
+                    cout << "\n Data sorted successfully! \n";
                     break;
 
                 default:
-                    cout << "\nInvalid. Please enter a correct letter!" << endl;
+                    cout << "\n X Invalid. Please enter a correct letter! X " << endl;
                     valid = false;
                 break;
             }
         } else {
-            cout << "\nInvalid. Please enter a single letter!" << endl;
+            cout << "\n X Invalid. Please enter a single letter! X " << endl;
             valid = false;
         }
 
@@ -471,14 +495,12 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
 
     } while (!valid);
 
-    
 }
-
 
 void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
     string idEmployee;
-    char choiceToUpdate;
+    string choiceToUpdate;
     varsToSearch searchResult;
 
     searchResult = searchingRecord(fileName, stfDetails, noOfStaff);
@@ -486,96 +508,98 @@ void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
     if (searchResult.found) {
 
         do {
-            cout << "Which one would you like to update: " << endl
-                << "1 - Name" << endl
-                << "2 - Position" << endl
-                << "3 - Department" << endl
-                << "4 - Email" << endl
-                << "5 - Age" << endl
-                << "6 - Salary" << endl
-                << "7 - Exit" << endl
-                << "Enter your choice: ";
-            cin >> choiceToUpdate;
-            cin.ignore();
+            cout << "    ---- Update Options ----    : " << endl
+                << " 1 - Name" << endl
+                << " 2 - Position" << endl
+                << " 3 - Department" << endl
+                << " 4 - Email" << endl
+                << " 5 - Age" << endl
+                << " 6 - Salary" << endl
+                << " 7 - Exit" << endl
+                << "\n - Enter your choice: ";
+            getline(cin, choiceToUpdate);
 
             
 
             bool updated(false);
             
-            switch (choiceToUpdate) {
-                case '1':
-                    cout << "Enter the employee name: ";
-                    getline(cin, stfDetails[searchResult.index].name);
-                    updated = true;
-                    break;
-                case '2':
-                    cout << "Enter the position: ";
-                    getline(cin, stfDetails[searchResult.index].position);
-                    updated = true;
-                    break;
-                case '3':
-                    cout << "Enter the department: ";
-                    getline(cin, stfDetails[searchResult.index].department);
-                    updated = true;
-                    break;
-                case '4':
-                    cout << "Enter the email address: ";
-                    getline(cin, stfDetails[searchResult.index].email);
-                    updated = true;
-                    break;
-                case '5':
-                    while (true) {
-                        string check;
-                        bool isCorrect(true);
-                        cout << "Enter the age: ";
-                        cin >> check;
-                        for (int i : check) {
-                            if (!isdigit(i)) {
-                                isCorrect = false;
-                                break;}
-                            }   
-                        if (isCorrect) {
-                            stfDetails[searchResult.index].age = stoi(check);
-                            updated = true;
-                            break;
-                        } else {
-                            cout << "Invalid. Please enter a correct number!\n\n"; }
-                    }
-                    break;
-                case '6': 
-                    while (true) {
-                        string check;
-                        bool isCorrect(true);
-                        cout << "Enter the salary: ";
-                        cin >> check;
-                        for (int i : check) {
-                            if (!isdigit(i)) {
-                                isCorrect = false;
-                                break;}
-                            }   
-                        if (isCorrect) {
-                            stfDetails[searchResult.index].salary = stoi(check);
-                            updated = true;
-                            break;
-                        } else {
-                            cout << "Invalid. Please enter a correct number!\n\n"; }
-                    }
-                    break;
-                case '7':
-                    break;
-                default:
-                    cout << "Invalid. Please enter a correct number";
-                    break;
+            if (choiceToUpdate.length() == 1) {
+                switch (choiceToUpdate[0]) {
+                    case '1':
+                        cout << " - Enter the employee name: ";
+                        getline(cin, stfDetails[searchResult.index].name);
+                        updated = true;
+                        break;
+                    case '2':
+                        cout << " - Enter the position: ";
+                        getline(cin, stfDetails[searchResult.index].position);
+                        updated = true;
+                        break;
+                    case '3':
+                        cout << " - Enter the department: ";
+                        getline(cin, stfDetails[searchResult.index].department);
+                        updated = true;
+                        break;
+                    case '4':
+                        cout << " - Enter the email address: ";
+                        getline(cin, stfDetails[searchResult.index].email);
+                        updated = true;
+                        break;
+                    case '5':
+                        while (true) {
+                            string check;
+                            bool isCorrect(true);
+                            cout << " - Enter the age: ";
+                            cin >> check;
+                            for (int i : check) {
+                                if (!isdigit(i)) {
+                                    isCorrect = false;
+                                    break;}
+                                }   
+                            if (isCorrect) {
+                                stfDetails[searchResult.index].age = stoi(check);
+                                updated = true;
+                                break;
+                            } else {
+                                cout << "\n X Invalid. Please enter a correct number! X \n\n";
+                                }
+                        }
+                        break;
+                    case '6': 
+                        while (true) {
+                            string check;
+                            bool isCorrect(true);
+                            cout << " - Enter the salary: ";
+                            cin >> check;
+                            for (int i : check) {
+                                if (!isdigit(i)) {
+                                    isCorrect = false;
+                                    break;}
+                                }   
+                            if (isCorrect) {
+                                stfDetails[searchResult.index].salary = stoi(check);
+                                updated = true;
+                                break;
+                            } else {
+                                cout << "\n X Invalid. Please enter a correct number! X \n\n"; }
+                        }
+                        break;
+                    case '7':
+                        break;
+                    default:
+                        cout << "\n X Invalid. Please enter a correct number! X \n\n";
+                        break;
+                }
+                if (updated) {
+                    cout <<"\n Updated successfuly \n\n";
+                }
+            } else {
+                cout << "\n X Invalid. Please enter a single number X \n\n";
             }
-            if (updated) {
-                cout <<"Updated successfuly\n\n";
-            }
-            
-        } while (choiceToUpdate != '7');
-        
-    } else {
-            cout << "Employee not found!\n\n";
-        }
+                
+        } while (choiceToUpdate[0] != '7');
+    
+    }
     saveData(fileName, stfDetails, noOfStaff);
 }
 
