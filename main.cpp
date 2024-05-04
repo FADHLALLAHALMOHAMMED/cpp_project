@@ -8,9 +8,6 @@
     Ali Alzahrani           | 2230007267
     Abdulsalam Al-eissa     | 2230003739
 
-    Group: 2
-    Project name: Staff System
-
 */
 
 
@@ -82,7 +79,9 @@ int main() {
     varsToSearch searchValues;
 
 
-    cout << "\n    -------- WELCOME TO THE STAFF SYSTEM --------    \n";
+    cout << "\n---------------------------------------------------\n"
+        << "|       WELCOME TO THE STAFF MANAGEMENT SYSTEM    |"
+        << "\n---------------------------------------------------\n";
 
     backUpData(stfFileName, backupFileName);
     loadData(stfFileName, stfDetails, noOfStf);
@@ -157,17 +156,19 @@ char menu() {
 
     while (true) {
         string choice;
-        cout << "\n    ---- Menu ----    " << endl
-            << " 1 - Display the records" << endl
-            << " 2 - Add a record"        << endl
-            << " 3 - Update a record"     << endl
-            << " 4 - Search for a record" << endl
-            << " 5 - Delete a record"     << endl
-            << " 6 - Sort the records"    << endl
-            << " 7 - Display the report"    << endl
-            << " 8 - Exit the program"    << endl
+        cout <<"===================================================" << endl
+            << "|                     Menu                        |" << endl
+            << "|-------------------------------------------------|" << endl
+            << "| 1 - Display the Records                         |" << endl
+            << "| 2 - Add a Record                                |" << endl
+            << "| 3 - Update a Record                             |" << endl
+            << "| 4 - Search for a Record                         |" << endl
+            << "| 5 - Delete a Record                             |" << endl
+            << "| 6 - Sort the Records                            |" << endl
+            << "| 7 - Exit the Program                            |" << endl
+            << "===================================================" << endl
             << endl
-            << "Please choose from the menu: ";
+            << "Please choose from the menu : ";
         getline(cin, choice);
         
 
