@@ -8,6 +8,9 @@
     Ali Alzahrani           | 2230007267
     Abdulsalam Al-eissa     | 2230003739
 
+    Group: 2
+    Project name: Staff System
+
 */
 
 
@@ -62,6 +65,7 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff);
 /*statisticalReport function provides a statistics about the employees data
 given in the "staff_info.txt" file*/
 void statisticalReport(string, staffInfo [], int&);
+void displayReport();
 
 
 int main() {
@@ -110,13 +114,16 @@ int main() {
                 sortRecords(stfFileName, stfDetails, noOfStf);
                 break;
             case '7':
+                displayReport();
+                break;
+            case '8':
                 // Exit the program
                 break;
             default:
                 cout << "\nInvalid input. Please enter a correct number!\n";
                 break;
         }
-    } while (userChoice != '7');
+    } while (userChoice != '8');
 
     saveData(stfFileName, stfDetails, noOfStf);
 
@@ -157,7 +164,8 @@ char menu() {
             << " 4 - Search for a record" << endl
             << " 5 - Delete a record"     << endl
             << " 6 - Sort the records"    << endl
-            << " 7 - Exit the program"    << endl
+            << " 7 - Display the report"    << endl
+            << " 8 - Exit the program"    << endl
             << endl
             << "Please choose from the menu: ";
         getline(cin, choice);
@@ -266,8 +274,8 @@ varsToSearch searchingRecord(string fileName, staffInfo stfDetails[], int& noOfS
         string check;
         bool isCorrect(true);
         cout << "\n - Enter the ID number: ";
-        cin >> check;
-        cin.ignore();
+        getline(cin, check);
+
         for (int i : check) {
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -331,8 +339,8 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
         string check;
         bool isCorrect(true);
         cout << " - Enter the ID number: ";
-        cin >> check;
-        cin.ignore();
+        getline(cin, check);
+        
         for (int i : check) { 
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -361,8 +369,7 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
         string check;
         bool isCorrect(true);
         cout << " - Enter the age: ";
-        cin >> check;
-        cin.ignore();
+        getline(cin, check);
         for (int i : check) {
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -381,8 +388,8 @@ void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
         string check;
         bool isCorrect(true);
         cout << " - Enter the current salary: ";
-        cin >> check;
-        cin.ignore();
+        getline(cin, check);
+
         for (int i : check) {
             if (!isdigit(i)) {
                 isCorrect = false;
@@ -411,11 +418,12 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
     do {    
         valid = true;
         cout << "\n    ---- Sort Options ----    \n"
-            << " a. Name\n"
-            << " b. ID\n"
-            << " c. Department\n"
-            << " d. salary\n"
-            << " e. Age\n"
+            << " a - Name\n"
+            << " b - ID\n"
+            << " c - Department\n"
+            << " d - Position\n"
+            << " e - salary\n"
+            << " f - Age\n"
             << "\n - Enter your choice: ";
         getline(cin, sortType);
 
@@ -456,8 +464,20 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                     }
                     cout << "\n Data sorted successfully! \n";
                     break;
-
+                
                 case 'd':
+                    // Sort by position alphabetically
+                    for (int i = 0; i < noOfStaff - 1; i++) {
+                        for (int j = i + 1; j < noOfStaff; j++) {
+                            if (stfDetails[i].position > stfDetails[j].position) {
+                                swap(stfDetails[i], stfDetails[j]);
+                            }
+                        }
+                    }
+                    cout << "\n Data sorted successfully! \n";
+                    break;
+
+                case 'e':
                     // Sort by salary in ascending order
                     for (int i = 0; i < noOfStaff - 1; i++) {
                         for (int j = i + 1; j < noOfStaff; j++) {
@@ -469,7 +489,7 @@ void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff) {
                     cout << "\n Data sorted successfully! \n";
                     break;
 
-                case 'e':
+                case 'f':
                     // Sort by age in ascending order
                     for (int i = 0; i < noOfStaff - 1; i++) {
                         for (int j = i + 1; j < noOfStaff; j++) {
@@ -550,7 +570,8 @@ void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
                             string check;
                             bool isCorrect(true);
                             cout << " - Enter the age: ";
-                            cin >> check;
+                            getline(cin, check);
+
                             for (int i : check) {
                                 if (!isdigit(i)) {
                                     isCorrect = false;
@@ -570,7 +591,8 @@ void updateRecord(string fileName, staffInfo stfDetails[], int& noOfStaff) {
                             string check;
                             bool isCorrect(true);
                             cout << " - Enter the salary: ";
-                            cin >> check;
+                            getline(cin, check);
+                            
                             for (int i : check) {
                                 if (!isdigit(i)) {
                                     isCorrect = false;
@@ -642,4 +664,21 @@ void backUpData(string fileName, string backupFileName) {
             backupFile << line << endl;
         }
     } while (!originFile.eof());
+}
+
+void displayReport() {
+
+    ifstream reportFile(statFileName);
+    string line;
+
+
+    if (reportFile.is_open()) {
+        cout << "\n  ---- Report ----  \n";
+        do {
+            getline(reportFile, line);
+            cout << line << endl;
+        } while (!reportFile.eof());
+    } else {
+        cout << "\n ? Sorry. The file couldn't be opened ? \n\n";
+    }
 }
