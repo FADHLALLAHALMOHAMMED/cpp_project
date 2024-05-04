@@ -1,5 +1,5 @@
 Number of Employees: 12
 Last update: 4-4-2024
-Time of last update (GMT+3): 19:38
+Time of last update (GMT+3): 19:53
 Total salaries of employees: 783000 SR
 Average age of employees: 31 y/o

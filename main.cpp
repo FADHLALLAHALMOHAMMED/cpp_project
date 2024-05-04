@@ -42,27 +42,35 @@ struct varsToSearch {
 };
 
 // functions' prototypes
+
+/* Display the menu to the user and return the user's choice */
 char menu();
 /* loadData loads the employees data into the array */ 
 void loadData(string, staffInfo [], int&);
+/* Backup the data in a new file */
 void backUpData(string, string);
+/* Displays all the records in the file */
 void displayRecord(string, staffInfo [], int&);
+/* Displays one record with a given index */
 void displayRecord(staffInfo[], int);
+/* Add a new record */
 void addRecord(string, staffInfo [], int&);
-/* updateRecord prompt the user to update one of the items in the record except the
+/* Prompt the user to update one of the items in the record except the
 identification number. It continues prompting to update until the user choose to exit */
 void updateRecord(string, staffInfo [], int&);
-/* searchingRecord return a struct of two variables. return boolean if employee is found
+/* Return a struct of two variables. return boolean if employee is found
 and the index of the employee in the array  */
 varsToSearch searchingRecord(string, staffInfo[], int&);
-// saveData function saves the data as following: name, id, position, department, email, age, salary
+// Saves the data as following: name, id, position, department, email, age, salary
 void saveData(string, staffInfo [], int&);
+/* Delete a specified record after searching for the ID number prompted from the user */
 void deleteItem(staffInfo [], int&, const string&);
-// sortRecords function sorts a specific category in records using Bubble Sort
+// Sorts a specific category in records using Bubble Sort
 void sortRecords(string fileName, staffInfo stfDetails[], int noOfStaff);
-/*statisticalReport function provides a statistics about the employees data
-given in the "staff_info.txt" file*/
+/* Provides a statistics about the employees data
+given in the "staff_info.txt" file */
 void statisticalReport(string, staffInfo [], int&);
+/* Display the report of the system */
 void displayReport();
 
 
