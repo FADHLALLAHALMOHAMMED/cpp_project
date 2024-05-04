@@ -21,6 +21,7 @@ using namespace std;
 
 
 const string statFileName = "statistical_report.txt";
+const int LIMIT = 1000;
 
 struct staffInfo {
 
@@ -70,7 +71,6 @@ int main() {
     const string stfFileName = "staff_info.txt";
     const string backupFileName = "backup_data.txt";
 
-    const int LIMIT = 1000;
     int noOfStf = 0;
     staffInfo stfDetails[LIMIT];
     char userChoice(0);
@@ -85,6 +85,7 @@ int main() {
 
     backUpData(stfFileName, backupFileName);
     loadData(stfFileName, stfDetails, noOfStf);
+    statisticalReport(statFileName, stfDetails, noOfStf);
 
     do {
         userChoice = menu();
@@ -210,6 +211,10 @@ void loadData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
 void saveData(string fileName, staffInfo stfDetails[], int& noOfStaff) {
 
+    if (noOfStaff < 0) {
+        return;
+    }
+
     ofstream staffFile(fileName);
 
     if (staffFile.is_open()) {
@@ -330,6 +335,11 @@ void deleteItem(staffInfo stfDetails[], int& noOfStaff, const string& fileName) 
 }
 
 void addRecord(string fileName, staffInfo stfDetails[], int& noOfStf) {
+
+    if (noOfStf >= LIMIT) {
+        cout << "\n X Sorry. Can't add a record because the file is full X \n\n";
+        return;
+    }
 
     cout << "\n    ---- Adding a Record ----    \n\n";
 
